@@ -1,0 +1,46 @@
+{
+  "chrome-devtools": {
+    "args": [
+      "chrome-devtools-mcp@latest"
+    ],
+    "command": "npx",
+    "env": {},
+    "type": "stdio"
+  },
+  "claude-design": {
+    "type": "http",
+    "url": "https://api.anthropic.com/v1/design/mcp"
+  },
+  "claude-historian-mcp": {
+    "args": [
+      "claude-historian-mcp"
+    ],
+    "command": "npx",
+    "env": {},
+    "type": "stdio"
+  },
+  "context7": {
+    "headers": {
+      "CONTEXT7_API_KEY": "<REDACTED:CONTEXT7_API_KEY>"
+    },
+    "type": "http",
+    "url": "https://mcp.context7.com/mcp"
+  },
+  "github": {
+    "args": [
+      "-c",
+      "GITHUB_PERSONAL_ACCESS_TOKEN=\"$(gh auth token)\" exec npx -y @modelcontextprotocol/server-github"
+    ],
+    "command": "sh",
+    "env": {},
+    "type": "stdio"
+  },
+  "playwright": {
+    "args": [
+      "@playwright/mcp@latest"
+    ],
+    "command": "npx",
+    "env": {},
+    "type": "stdio"
+  }
+}

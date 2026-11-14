@@ -1,0 +1,13 @@
+linux/.config/nvim/lazy-lock.json
+linux/.zsh_history
+linux/.zshenv
+
+# Claude: safety net, sync.py never exports these but ignore them anyway
+claude/home/.credentials.json
+claude/home/history.jsonl
+claude/home/*.log
+claude/home/sessions/
+claude/home/projects/
+claude/home/session-env/
+claude/home/shell-snapshots/
+claude/__pycache__/

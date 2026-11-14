@@ -1,0 +1,178 @@
+{
+  "cleanupPeriodDays": 20,
+  "env": {
+    "ECC_GATEGUARD": "off",
+    "BULK_READ_MIN_LINES": "500",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet"
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "permissions": {
+    "allow": [
+      "WebFetch",
+      "WebSearch",
+      "mcp__chrome-devtools",
+      "mcp__claude-historian-mcp",
+      "mcp__claude-in-chrome",
+      "mcp__context7",
+      "mcp__playwright"
+    ],
+    "deny": [],
+    "defaultMode": "auto",
+    "backup_deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/.dev.vars*)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(**/secrets/**)",
+      "Read(**/credentials/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.ssh/**)",
+      "Read(**/config/database.yml)",
+      "Read(**/config/credentials.json)",
+      "Read(~/.npmrc)",
+      "Read(~/.pypirc)",
+      "Edit(**/.env*)",
+      "Edit(**/secrets/**)",
+      "Edit(~/.ssh/**)"
+    ]
+  },
+  "model": "sonnet",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/bulk-read-guard.sh",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "bulk-read-guard"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/bulk-read-guard-bash.sh",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "bulk-read-guard"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/biome-format.sh",
+            "timeout": 30,
+            "statusMessage": "biome"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/stop-typecheck.sh",
+            "timeout": 180,
+            "statusMessage": "typecheck"
+          }
+        ]
+      }
+    ]
+  },
+  "workflowSizeGuideline": "small",
+  "bashOutputMaxChars": 15000,
+  "taskOutputMaxChars": 15000,
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "ponytail@ponytail": true,
+    "ecc@ecc": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "cc-plugin-you-should-know@builtin": true,
+    "effortless@effortless": true,
+    "typesafe@typesafe-ai": true,
+    "claude-security@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "ecc": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/affaan-m/ECC.git"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    },
+    "effortless": {
+      "source": {
+        "source": "github",
+        "repo": "HeyCubit/effortless"
+      }
+    },
+    "typesafe-ai": {
+      "source": {
+        "source": "github",
+        "repo": "typesafe-ai/skills"
+      }
+    }
+  },
+  "sandbox": {
+    "enabled": false,
+    "autoAllowBashIfSandboxed": true,
+    "allowUnsandboxedCommands": true
+  },
+  "effortLevel": "medium",
+  "modelSettings": {
+    "claude-opus-5": {},
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    },
+    "claude-opus-4-8": {
+      "effortLevel": "high"
+    },
+    "claude-sonnet-5-5": {
+      "autoCompactWindow": 700000
+    }
+  },
+  "promptSuggestionEnabled": false,
+  "pluginConfigs": {
+    "effortless@effortless": {
+      "options": {
+        "hide": "",
+        "helpers": "on"
+      }
+    }
+  },
+  "autoUpdatesChannel": "latest",
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "theme": "dark",
+  "switchModelsOnFlag": false,
+  "remoteControlAtStartup": false,
+  "agentPushNotifEnabled": true
+}

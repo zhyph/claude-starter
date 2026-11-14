@@ -1,7 +1,8 @@
 {
   "chrome-devtools": {
     "args": [
-      "chrome-devtools-mcp@latest"
+      "chrome-devtools-mcp@latest",
+      "--autoConnect"
     ],
     "command": "npx",
     "env": {},

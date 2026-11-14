@@ -2,7 +2,6 @@
   "cleanupPeriodDays": 20,
   "env": {
     "ECC_GATEGUARD": "off",
-    "BULK_READ_MIN_LINES": "500",
     "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet"
   },
   "attribution": {
@@ -44,32 +43,6 @@
   },
   "model": "sonnet",
   "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Read",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/bulk-read-guard.sh",
-            "timeout": 10,
-            "onFailure": "block",
-            "statusMessage": "bulk-read-guard"
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/bulk-read-guard-bash.sh",
-            "timeout": 10,
-            "onFailure": "block",
-            "statusMessage": "bulk-read-guard"
-          }
-        ]
-      }
-    ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write|MultiEdit",

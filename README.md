@@ -12,8 +12,7 @@ files under `claude/home/` before installing; customize afterwards.
 
 1. **Check prerequisites.** Run `python3 --version`, `git --version`, `jq --version`,
    `gh --version`, `node --version`, `claude --version`. Python 3 and git are needed by
-   the installer. `jq` is needed by the hooks and statusline. `gh` is needed by the
-   GitHub MCP server. Node (for `npx`) is needed by most MCP servers. Install whatever
+   the installer. `jq` is needed by the hooks and statusline. `gh` is needed by the GitHub MCP server (it reads `gh auth token`). Node (for `npx`) is needed by most MCP servers. Install whatever
    is missing with the user's package manager (apt, brew, winget, etc.), after asking.
 2. **Authenticate GitHub.** `gh auth status`; if not logged in, ask the user to run
    `gh auth login` themselves (it is interactive; in Claude Code they can type
@@ -81,7 +80,6 @@ session start), so some behavior in a session comes from them, not from this rep
 
 | Hook | When | Effect |
 | --- | --- | --- |
-| `bulk-read-guard.sh`, `bulk-read-guard-bash.sh` | before Read / Bash | Blocks reading very large files in one go (threshold `BULK_READ_MIN_LINES`, default 500 in `env`) and nudges toward ranges or the `bulk-reader` agent. |
 | `biome-format.sh` | after Edit/Write | Runs biome on the edited file, only in projects that have a `biome.json`. |
 | `stop-typecheck.sh` | when Claude stops | Runs `tsc` only in projects with a `tsconfig.json` and a local `node_modules/.bin/tsc`; feeds errors back to Claude. |
 

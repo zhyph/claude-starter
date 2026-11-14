@@ -13,7 +13,7 @@
 - For multi-file changes, present only what changed and why in one block, not per-file commentary.
 - Avoid restating the user's question or request back to them.
 - If a command output answers the question, show the relevant part. Don't paraphrase the entire output.
-- Locate with `grep -n` before reading. Read a range (`offset`/`limit`, `sed -n 'A,Bp'`) rather than a whole large file, or delegate it to the `bulk-reader` subagent with an absolute path and a precise question.
+- Locate with `grep -n` before reading. Read a range (`offset`/`limit`, `sed -n 'A,Bp'`) rather than a whole large file.
 - Long session or a change of subject: suggest `/compact` or `/clear` in one line before continuing.
 
 ## Project Conventions
